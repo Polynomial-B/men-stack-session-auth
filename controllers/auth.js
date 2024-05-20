@@ -49,5 +49,43 @@ router.post("/sign-up", async (req, res) => {
 })
 
 
+router.get('/sign-in', (req, res) => {
+    res.render("auth/sign-in.ejs")
+})
+
+
+router.post("/sign-in", async (req, res) => {
+    
+    // User will send username and password
+
+    // Check for existing user
+    const userInDatabase = await User.findOne({ username: req.body.username });
+    // If user doesn't exist, send generic failure message
+    if (!userInDatabase) {
+        return res.send("Login failed. Please try again.")
+    }
+    // The user exists in our DB, check password against stored hash
+    const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.password)
+
+    if(!validPassword) {
+        return res.send("Login failed. Please try again.")
+    }
+
+    req.session.user = {
+        username: userInDatabase.username
+
+    }
+
+    res.redirect('/')
+})
+
+router.get('/sign-out', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+})
+
+
+
+
 
 module.exports = router; // we need to import into server.js

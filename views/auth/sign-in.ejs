@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: brown">
+    <h1>Sign In</h1>
+    <form action="/auth/sign-in" method="POST">
+        
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username"/>
+        <br>
+        <label for="password" name="password" id="password">Password</label>
+        <input type="password" name="password" id="password"/>
+        <br>
+        <button type="submit">Sign in</button>
+        
+        <!-- Below is literally the same as button (above) -->
+        <!-- <input type="submit" value="Sign in" /> -->
+    </form>
+    
+</body>
+</html>
